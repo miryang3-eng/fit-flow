@@ -1,5 +1,2 @@
 [run]
-"build:dev" = "npm run dev"
-
-[build]
-command = "npm install"
+"build:dev" = "npm run build:dev"
