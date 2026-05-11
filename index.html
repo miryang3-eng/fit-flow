@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FIT PRO — Chef Leonardo Ferrari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --green:#00C853;--green-mid:#00A040;--green-dark:#006228;
+  --green-pale:#F0FDF4;--green-soft:#D1FAE5;
+  --white:#FFFFFF;--off:#F8FAFB;--ink:#0C1015;--ink2:#1E293B;
+  --muted:#64748B;--muted2:#94A3B8;--border:#E2E8F0;--border2:#CBD5E1;
+  --yellow:#F59E0B;--orange:#F97316;
+  --font:'Sora',system-ui,sans-serif;--brand:'Space Grotesk','Sora',sans-serif;
+  --sg:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --sm:0 4px 16px rgba(0,0,0,.07),0 2px 6px rgba(0,0,0,.04);
+  --md:0 8px 32px rgba(0,0,0,.09),0 2px 8px rgba(0,0,0,.05);
+  --lg:0 16px 48px rgba(0,0,0,.10),0 4px 16px rgba(0,0,0,.06);
+  --xl:0 32px 80px rgba(0,0,0,.14),0 8px 24px rgba(0,0,0,.08);
+  --sg-g:0 12px 48px rgba(0,200,83,.22);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:#fff;color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;font-family:inherit;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);}
+.rv.on{opacity:1;transform:none;}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* TOPBAR */
+.topbar{background:var(--ink);color:#fff;text-align:center;padding:10px 20px;font-size:13px;font-weight:600;position:relative;overflow:hidden;}
+.topbar::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,200,83,.18) 0%,transparent 70%);pointer-events:none;}
+.topbar span{color:var(--green);font-weight:800;}
+
+/* HERO */
+.hero{background:#fff;padding:80px 20px 96px;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#E2E8F0 1px,transparent 1px);background-size:28px 28px;opacity:.4;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(64px);animation:floatOrb 9s ease-in-out infinite;}
+.orb-1{width:500px;height:500px;background:rgba(0,200,83,.07);top:-120px;left:-160px;}
+.orb-2{width:380px;height:380px;background:rgba(59,130,246,.05);top:-80px;right:-100px;animation-delay:3s;}
+.orb-3{width:300px;height:300px;background:rgba(0,200,83,.05);bottom:-60px;right:8%;animation-delay:6s;}
+@keyframes floatOrb{0%,100%{transform:translateY(0)}50%{transform:translateY(-28px)}}
+.hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto;}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--green-pale);border:1px solid rgba(0,200,83,.3);border-radius:50px;padding:7px 20px;font-size:12px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:28px;}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.8s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+.hero h1{font-family:var(--brand);font-size:clamp(36px,5.5vw,72px);font-weight:800;line-height:1.04;letter-spacing:-2px;margin-bottom:24px;}
+.hero h1 .grad{background:linear-gradient(135deg,#00C853,#00A040);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:clamp(17px,2.2vw,21px);color:var(--muted);max-width:660px;margin:0 auto 48px;line-height:1.6;}
+.hero-sub strong{color:var(--ink2);font-weight:700;}
+
+/* COMPARISON */
+.comp{display:flex;gap:10px;max-width:660px;margin:0 auto 52px;border-radius:20px;overflow:hidden;box-shadow:var(--xl);}
+.comp-side{flex:1;position:relative;min-height:210px;border-radius:14px;overflow:hidden;}
+.comp-side img{width:100%;height:210px;object-fit:cover;transition:transform .5s;}
+.comp-side:hover img{transform:scale(1.04);}
+.comp-side.boring img{filter:grayscale(80%) brightness(.72);}
+.comp-ov{position:absolute;bottom:0;left:0;right:0;padding:14px 12px;}
+.comp-side.boring .comp-ov{background:linear-gradient(0deg,rgba(239,68,68,.88),transparent);}
+.comp-side.good  .comp-ov{background:linear-gradient(0deg,rgba(0,160,64,.9),transparent);}
+.comp-ov .cl{font-size:14px;font-weight:800;color:#fff;}
+.comp-ov .cs{font-size:11px;color:rgba(255,255,255,.85);margin-top:2px;}
+.comp-mid{display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--muted2);flex-shrink:0;padding:0 4px;}
+
+/* CTA */
+.btn-cta{display:inline-block;background:linear-gradient(135deg,#00C853,#00E676);color:#000;font-family:var(--brand);font-size:18px;font-weight:800;padding:22px 48px;border-radius:16px;text-transform:uppercase;letter-spacing:.5px;box-shadow:var(--sg-g),0 4px 16px rgba(0,0,0,.1);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;border:none;}
+.btn-cta::before{content:'';position:absolute;top:-50%;left:-80%;width:50%;height:200%;background:rgba(255,255,255,.28);transform:skewX(-20deg);animation:shimmer 3s ease-in-out infinite;}
+@keyframes shimmer{0%{left:-80%}100%{left:160%}}
+.btn-cta:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,200,83,.35),0 6px 20px rgba(0,0,0,.12);}
+.btn-sub{display:block;font-size:11px;font-weight:600;color:rgba(0,0,0,.5);margin-top:5px;text-transform:none;letter-spacing:0;}
+.proof{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:28px;font-size:14px;color:var(--muted);}
+.avs{display:flex;}
+.avs img{width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-10px;box-shadow:var(--sg);object-fit:cover;}
+.avs img:first-child{margin-left:0;}
+.proof strong{color:var(--ink2);}
+
+/* LAYOUT */
+.sec{padding:96px 20px;}
+.inner{max-width:900px;margin:0 auto;}
+.inner.wide{max-width:1060px;}
+.inner.narrow{max-width:720px;}
+.bg-off{background:var(--off);}
+.bg-green{background:var(--green-pale);}
+.bg-ink{background:var(--ink);}
+.divider{height:1px;background:var(--border);}
+.lbl{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--green-mid);margin-bottom:16px;}
+.lbl::before{content:'';width:20px;height:2px;background:var(--green);border-radius:2px;}
+.h2{font-family:var(--brand);font-size:clamp(26px,4vw,46px);font-weight:800;line-height:1.1;letter-spacing:-1px;color:var(--ink);margin-bottom:20px;}
+.h2 .hi{color:var(--green-mid);}
+.body-txt{font-size:18px;color:var(--muted);line-height:1.7;}
+
+/* OPEN LOOP */
+.ol-box{background:linear-gradient(135deg,#FFFBEB,#FEF9C3);border:1px solid #FDE68A;border-left:4px solid var(--yellow);border-radius:0 14px 14px 0;padding:22px 28px;font-size:17px;line-height:1.65;color:#78350F;max-width:800px;margin:0 auto;}
+.ol-box strong{color:#92400E;}
+
+/* PAIN */
+.pain-grid{display:flex;flex-direction:column;gap:12px;margin-top:40px;}
+.pain-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 20px 18px 56px;font-size:16px;color:var(--ink2);line-height:1.55;position:relative;box-shadow:var(--sg);transition:box-shadow .2s,border-color .2s;}
+.pain-item:hover{box-shadow:var(--sm);border-color:var(--border2);}
+.pain-item .pi{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#EF4444;width:24px;height:24px;}
+.pain-item em{font-style:normal;color:var(--muted);}
+
+/* PATTERN INTERRUPT */
+.pi-q{background:var(--ink);color:#fff;text-align:center;padding:64px 20px;position:relative;overflow:hidden;}
+.pi-q::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,200,83,.12) 0%,transparent 70%);}
+.pi-q h2{font-family:var(--brand);font-size:clamp(24px,4vw,44px);font-weight:800;letter-spacing:-1px;position:relative;z-index:1;line-height:1.2;}
+.pi-q h2 span{color:var(--green);}
+
+/* CHEF */
+.chef-grid{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:center;}
+@media(max-width:640px){.chef-grid{grid-template-columns:1fr;gap:36px;text-align:center;}}
+.chef-card{background:#fff;border:1px solid var(--border);border-radius:24px;padding:0;box-shadow:var(--lg);overflow:hidden;position:relative;}
+.chef-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green),#00E676);}
+.chef-img{width:100%;height:280px;object-fit:cover;object-position:top;}
+.chef-card-info{padding:20px;}
+.chef-card-name{font-family:var(--brand);font-size:17px;font-weight:800;color:var(--ink);}
+.chef-card-role{font-size:11px;color:var(--green-mid);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.chef-badge{display:inline-block;background:var(--green-pale);border:1px solid rgba(0,200,83,.25);border-radius:4px;padding:3px 12px;font-size:11px;font-weight:700;color:var(--green-mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+.chef-name{font-family:var(--brand);font-size:38px;font-weight:800;letter-spacing:-1px;margin-bottom:6px;}
+.chef-role{font-size:15px;color:var(--green-mid);font-weight:600;margin-bottom:18px;}
+.chef-bio{font-size:16px;color:var(--muted);line-height:1.7;}
+.chef-stats{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap;}
+@media(max-width:640px){.chef-stats{justify-content:center;}}
+.cs strong{display:block;font-family:var(--brand);font-size:32px;font-weight:800;color:var(--green-mid);line-height:1;}
+.cs span{font-size:12px;color:var(--muted2);}
+
+/* MECHANISM */
+.mech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:22px;margin-top:48px;}
+.mech-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px 26px;box-shadow:var(--sg);transition:transform .25s,box-shadow .25s,border-color .25s;overflow:hidden;position:relative;}
+.mech-card:hover{transform:translateY(-6px);box-shadow:var(--lg);border-color:rgba(0,200,83,.3);}
+.mech-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),transparent);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.mech-card:hover::after{transform:scaleX(1);}
+.mech-num{font-family:var(--brand);font-size:52px;font-weight:800;color:var(--green-soft);line-height:1;margin-bottom:14px;}
+.mech-card h3{font-family:var(--brand);font-size:19px;font-weight:800;color:var(--green-mid);margin-bottom:10px;}
+.mech-card p{font-size:14px;color:var(--muted);line-height:1.65;}
+.steps{margin-top:48px;}
+.step{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--border);}
+.step:last-child{border:none;}
+.step-n{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00E676);color:#000;font-family:var(--brand);font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--sg-g);}
+.step h4{font-size:16px;font-weight:700;margin-bottom:5px;}
+.step p{font-size:14px;color:var(--muted);line-height:1.6;}
+
+/* ═══ APP MOCKUP ANIMATED ═══ */
+.app-wrap{display:grid;grid-template-columns:300px 1fr;gap:64px;align-items:center;margin-top:64px;}
+@media(max-width:700px){.app-wrap{grid-template-columns:1fr;gap:40px;}}
+.phone-shell{width:280px;margin:0 auto;position:relative;}
+.phone{width:280px;background:#1a1a1a;border-radius:44px;border:7px solid #2a2a2a;box-shadow:var(--xl),0 0 0 1px rgba(0,200,83,.08);overflow:hidden;position:relative;}
+.phone-top{height:28px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;}
+.notch{width:80px;height:18px;background:#111;border-radius:0 0 14px 14px;}
+.phone-screen{height:520px;overflow:hidden;position:relative;background:#000;}
+/* Slides */
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;}
+.slide.active{opacity:1;}
+.slide img{width:100%;height:100%;object-fit:cover;}
+/* Progress dots */
+.phone-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
+.phone-dot{width:8px;height:8px;border-radius:50%;background:var(--border2);transition:background .3s,transform .3s;}
+.phone-dot.active{background:var(--green);transform:scale(1.2);}
+/* Progress bar */
+.phone-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,.1);}
+.phone-bar-fill{height:100%;background:var(--green);width:0;transition:width 3s linear;}
+.phone-home{height:24px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;}
+.home-pill{width:70px;height:4px;background:#333;border-radius:2px;}
+
+/* Feature list */
+.feat-list{display:flex;flex-direction:column;gap:22px;}
+.feat-item{display:flex;gap:16px;align-items:flex-start;}
+.feat-icon{width:48px;height:48px;flex-shrink:0;border-radius:14px;background:var(--green-pale);border:1px solid rgba(0,200,83,.2);display:flex;align-items:center;justify-content:center;transition:transform .2s;color:var(--green-mid);}
+.feat-item:hover .feat-icon{transform:scale(1.08);}
+.feat-item h4{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.feat-item p{font-size:14px;color:var(--muted);line-height:1.55;}
+
+/* RESULTS CALLOUT */
+.results-img{margin-top:32px;border-radius:16px;overflow:hidden;box-shadow:var(--lg);}
+.results-img img{width:100%;height:auto;}
+
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:48px;}
+.testi-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:26px;box-shadow:var(--sg);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;}
+.testi-card:hover{transform:translateY(-4px);box-shadow:var(--md);}
+.testi-stars{display:flex;gap:3px;color:var(--yellow);margin-bottom:14px;}
+.testi-text{font-size:15px;color:var(--ink2);line-height:1.65;font-style:italic;flex:1;margin-bottom:18px;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-av{width:42px;height:42px;border-radius:50%;background:var(--green-soft);border:2px solid var(--green-soft);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--green-mid);}
+.testi-av img{width:100%;height:100%;object-fit:cover;}
+.testi-name{font-size:14px;font-weight:700;color:var(--ink);}
+.testi-loc{font-size:12px;color:var(--muted2);}
+.testi-result{display:inline-block;background:var(--green-pale);border:1px solid rgba(0,200,83,.25);border-radius:4px;padding:2px 9px;font-size:11px;font-weight:700;color:var(--green-mid);margin-top:4px;}
+/* WhatsApp screenshot testimonial */
+.testi-card.whatsapp{padding:0;overflow:hidden;}
+.testi-card.whatsapp img{width:100%;height:auto;}
+
+/* RECIPES */
+.recipes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:48px;}
+.recipe-card{background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--sg);transition:transform .25s,box-shadow .25s;}
+.recipe-card:hover{transform:translateY(-5px);box-shadow:var(--lg);}
+.recipe-img-wrap{height:180px;overflow:hidden;}
+.recipe-img{width:100%;height:180px;object-fit:cover;transition:transform .4s;}
+.recipe-card:hover .recipe-img{transform:scale(1.05);}
+.recipe-body{padding:18px;}
+.recipe-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.3;}
+.tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.tg{background:var(--green-pale);color:var(--green-mid);border:1px solid rgba(0,200,83,.2);}
+.ty{background:#FFFBEB;color:#92400E;border:1px solid rgba(245,158,11,.25);}
+.to{background:#FFF7ED;color:#C2410C;border:1px solid rgba(249,115,22,.25);}
+.recipes-more{text-align:center;margin-top:28px;font-family:var(--brand);font-size:22px;font-weight:800;color:var(--green-mid);}
+.cat-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px;}
+.cat-chip{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 24px;text-align:center;box-shadow:var(--sg);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--green-mid);}
+.cat-chip span{font-size:14px;font-weight:700;color:var(--ink2);}
+
+/* VALUE STACK */
+.stack{display:flex;flex-direction:column;gap:12px;margin-top:48px;}
+.si{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:var(--sg);transition:box-shadow .2s;}
+.si:hover{box-shadow:var(--sm);}
+.si.star{border-color:rgba(245,158,11,.3);background:#FFFBEB;}
+.si-l{display:flex;align-items:center;gap:14px;}
+.si-icon{font-size:26px;flex-shrink:0;color:var(--green-mid);width:28px;height:28px;}
+.si-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.si-desc{font-size:13px;color:var(--muted);}
+.si-r{text-align:right;flex-shrink:0;white-space:nowrap;}
+.si-old{font-size:12px;color:var(--muted2);text-decoration:line-through;}
+.si-val{font-size:17px;font-weight:800;color:var(--green-mid);}
+.si-val.free{color:var(--yellow);}
+.stack-total{background:linear-gradient(135deg,var(--green-pale),#E0F9EC);border:2px solid rgba(0,200,83,.3);border-radius:20px;padding:26px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:var(--sg-g);margin-top:8px;}
+@media(max-width:540px){.stack-total{flex-direction:column;text-align:center;gap:12px;}}
+.st-lbl{font-size:18px;font-weight:700;color:var(--ink);}
+.st-sub{font-size:13px;color:var(--muted);margin-top:3px;}
+.st-from{font-size:13px;color:var(--muted2);text-decoration:line-through;}
+.st-price{font-family:var(--brand);font-size:52px;font-weight:800;color:var(--green-dark);line-height:1;}
+.st-once{font-size:12px;color:var(--muted);}
+
+/* PRICE PER DAY */
+.ppd{text-align:center;padding:72px 20px;background:var(--ink);position:relative;overflow:hidden;}
+.ppd::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,200,83,.1) 0%,transparent 65%);}
+.ppd-big{font-family:var(--brand);font-size:clamp(64px,12vw,120px);font-weight:800;color:var(--green);line-height:1;position:relative;z-index:1;}
+.ppd-cap{font-size:20px;color:rgba(255,255,255,.65);margin-top:10px;position:relative;z-index:1;}
+.ppd-sub{font-size:14px;color:rgba(255,255,255,.3);margin-top:6px;position:relative;z-index:1;}
+
+/* BONUSES */
+.bonus-list{display:flex;flex-direction:column;gap:16px;margin-top:48px;}
+.bonus-item{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px 26px;display:grid;grid-template-columns:60px 1fr auto;gap:20px;align-items:center;box-shadow:var(--sg);transition:transform .2s,box-shadow .2s;}
+.bonus-item:hover{transform:translateY(-2px);box-shadow:var(--sm);}
+.bonus-item.star{border-color:rgba(245,158,11,.3);}
+@media(max-width:540px){.bonus-item{grid-template-columns:1fr;gap:12px;}}
+.bi-icon{width:60px;height:60px;border-radius:16px;background:var(--green-pale);border:1px solid rgba(0,200,83,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--green-mid);}
+.bonus-item h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.bonus-item p{font-size:14px;color:var(--muted);line-height:1.5;}
+.bp{text-align:right;}
+.bp-old{font-size:12px;color:var(--muted2);text-decoration:line-through;}
+.bp-free{font-size:20px;font-weight:800;color:var(--green-mid);}
+
+/* OBJECTION */
+.obj-box{background:#fff;border:1px solid var(--border);border-radius:20px;padding:38px 34px;margin-top:48px;box-shadow:var(--sm);position:relative;overflow:hidden;}
+.obj-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--yellow),var(--orange));}
+.obj-box h3{font-family:var(--brand);font-size:22px;font-weight:800;color:var(--ink);margin-bottom:14px;}
+.obj-box p{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:13px;}
+.obj-box p:last-child{margin-bottom:0;}
+.obj-box strong{color:var(--ink2);}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:22px;margin-top:52px;}
+.pc{background:#fff;border:1px solid var(--border);border-radius:22px;padding:34px 26px;position:relative;text-align:center;box-shadow:var(--sg);transition:transform .25s,box-shadow .25s;}
+.pc:hover{transform:translateY(-5px);box-shadow:var(--lg);}
+.pc.feat{border-color:var(--green);box-shadow:var(--sg-g),var(--md);transform:scale(1.04);background:linear-gradient(175deg,var(--green-pale) 0%,#fff 100%);}
+.pc.feat:hover{transform:scale(1.04) translateY(-5px);}
+.pc-best{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--green),#00E676);color:#000;font-family:var(--brand);font-size:11px;font-weight:800;padding:4px 18px;border-radius:50px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,200,83,.3);}
+.pc-lbl{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted2);font-weight:700;margin-bottom:8px;}
+.pc-name{font-family:var(--brand);font-size:21px;font-weight:800;color:var(--ink);margin-bottom:22px;}
+.pc-from{font-size:14px;color:var(--muted2);text-decoration:line-through;margin-bottom:4px;}
+.pc-price{font-family:var(--brand);font-size:58px;font-weight:800;color:var(--green-dark);line-height:1;margin-bottom:5px;}
+.pc-once{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.pc-tag{display:inline-block;background:linear-gradient(135deg,var(--green-pale),var(--green-soft));color:var(--green-dark);border:1px solid rgba(0,200,83,.3);font-size:11px;font-weight:800;padding:4px 14px;border-radius:50px;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;}
+.pc-list{list-style:none;text-align:left;margin-bottom:26px;}
+.pc-list li{font-size:14px;color:var(--ink2);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px;}
+.pc-list li:last-child{border:none;}
+.pc-list li .ck{color:var(--green);flex-shrink:0;width:16px;height:16px;margin-top:1px;}
+.btn-plan{width:100%;padding:18px;border-radius:13px;font-family:var(--brand);font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;transition:all .2s;}
+.btn-plan.primary{background:linear-gradient(135deg,#00C853,#00E676);color:#000;border:none;box-shadow:0 4px 20px rgba(0,200,83,.3);}
+.btn-plan.primary:hover{box-shadow:0 8px 32px rgba(0,200,83,.45);transform:translateY(-2px);}
+.btn-plan.ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border2);}
+.btn-plan.ghost:hover{border-color:var(--green);color:var(--green-mid);}
+.btn-plan-sub{font-size:11px;color:var(--muted2);margin-top:10px;text-align:center;}
+
+/* GUARANTEE */
+.gbox{max-width:660px;margin:52px auto 0;background:linear-gradient(135deg,var(--green-pale),#E8FDF0);border:2px solid rgba(0,200,83,.3);border-radius:28px;padding:52px 42px;text-align:center;box-shadow:var(--sg-g);}
+@media(max-width:480px){.gbox{padding:36px 22px;}}
+.gbox-icon{display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--green-mid);}
+.gbox h3{font-family:var(--brand);font-size:27px;font-weight:800;color:var(--ink);margin-bottom:14px;}
+.gbox p{font-size:16px;color:var(--muted);line-height:1.7;}
+.gbox strong{color:var(--green-dark);}
+.seals{display:flex;justify-content:center;gap:26px;margin-top:30px;flex-wrap:wrap;}
+.seal{text-align:center;font-size:11px;color:var(--muted2);}
+.seal .si-icon{width:28px;height:28px;margin:0 auto 5px;color:var(--green-mid);}
+
+/* FAQ */
+.faq-list{margin-top:48px;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:last-child{border:none;}
+details summary{list-style:none;padding:22px 0;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:color .2s;}
+details summary:hover{color:var(--green-mid);}
+details summary .fq-icon{flex-shrink:0;width:22px;height:22px;color:var(--green);transition:transform .25s;}
+details[open] summary .fq-icon{transform:rotate(45deg);}
+details summary::-webkit-details-marker{display:none;}
+.faq-a{font-size:15px;color:var(--muted);line-height:1.7;padding-bottom:22px;}
+
+/* FINAL CTA */
+.final{background:var(--ink);color:#fff;padding:112px 20px;text-align:center;position:relative;overflow:hidden;}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,200,83,.15) 0%,transparent 60%);}
+.final-inner{position:relative;z-index:1;}
+.final h2{font-family:var(--brand);font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-1.5px;line-height:1.08;margin-bottom:20px;}
+.final h2 em{font-style:normal;color:var(--green);}
+.final p{font-size:19px;color:rgba(255,255,255,.6);max-width:540px;margin:0 auto 44px;}
+.ps-box{max-width:580px;margin:56px auto 0;text-align:left;border-top:1px solid rgba(255,255,255,.08);padding-top:30px;font-size:15px;color:rgba(255,255,255,.4);line-height:1.7;}
+.ps-box strong{color:rgba(255,255,255,.7);}
+
+/* FOOTER */
+footer{background:#060808;padding:44px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.04);}
+footer p{font-size:12px;color:#2a3a2a;line-height:2;}
+footer a{color:#3a4a3a;}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .comp{flex-direction:column;}
+  .comp-mid{transform:rotate(90deg);}
+  .btn-cta{font-size:15px;padding:18px 28px;}
+  .si{flex-wrap:wrap;}
+  .si-r{text-align:left;}
+}
+</style>
+  
+  
+  <meta name="description" content="Fit Flow is a fitness tracking application that helps users monitor their workouts and progress.">
+  
+  
+  <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c802edd-7616-429f-9933-9dbab8543062/id-preview-70816c9a--1a9e390a-9f82-4998-9a9e-c72511515524.lovable.app-1778499167103.png">
+  <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1c802edd-7616-429f-9933-9dbab8543062/id-preview-70816c9a--1a9e390a-9f82-4998-9a9e-c72511515524.lovable.app-1778499167103.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FIT PRO — Chef Leonardo Ferrari">
+  <meta name="twitter:title" content="FIT PRO — Chef Leonardo Ferrari">
+  <meta property="og:description" content="Fit Flow is a fitness tracking application that helps users monitor their workouts and progress.">
+  <meta name="twitter:description" content="Fit Flow is a fitness tracking application that helps users monitor their workouts and progress.">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>+7.200 pessoas</span> já bateram a meta de proteína comendo hambúrguer, pizza e sobremesa — e com músculo de verdade.
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  <div class="hero-inner">
+    <div class="rv">
+      <div class="pill"><span class="pill-dot"></span>IA de nutrição personalizada · +7.200 usuários ativos</div>
+    </div>
+    <h1 class="rv d1">
+      Ganhar músculos<br>nunca foi tão <span class="grad">gostoso</span><br>— e fácil
+    </h1>
+    <p class="hero-sub rv d2">
+      A IA do Chef Ferrari calcula sua meta de proteína, analisa o que você tem na geladeira<br>
+      e entrega a receita perfeita para o seu corpo.<br>
+      <strong>Hambúrguer, pizza e sobremesa — incluídos.</strong>
+    </p>
+
+    <!-- COMPARISON -->
+    <div class="comp rv d2">
+      <div class="comp-side boring">
+        <img src="images/CmdzdC8187070.jpeg" alt="Dieta genérica — frango todo dia">
+        <div class="comp-ov"><div class="cl">Dieta genérica</div><div class="cs">Frango. Todo dia. Igual. Enjoo.</div></div>
+      </div>
+      <div class="comp-mid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+      <div class="comp-side good">
+        <img src="images/nsFDuN2787444.webp" alt="Com FIT PRO — comida gostosa com proteína">
+        <div class="comp-ov"><div class="cl">Com FIT PRO</div><div class="cs">Proteína real. Sabor de delivery.</div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="rv d3">
+      <a href="#comprar" class="btn-cta">
+        QUERO GANHAR MÚSCULO COMENDO BEM
+        <span class="btn-sub">De R$147 por apenas R$47 · Acesso imediato · Garantia 30 dias</span>
+      </a>
+    </div>
+
+    <div class="proof rv d4">
+      <div class="avs">
+        <img src="images/EsdHMM5332694.jpeg" alt="Usuária">
+        <img src="images/EsdHMM5332694.jpeg" alt="Usuário" style="filter:hue-rotate(30deg)">
+        <img src="images/EsdHMM5332694.jpeg" alt="Usuária" style="filter:hue-rotate(60deg)">
+        <img src="images/EsdHMM5332694.jpeg" alt="Usuário" style="filter:hue-rotate(90deg)">
+        <img src="images/EsdHMM5332694.jpeg" alt="Usuária" style="filter:hue-rotate(120deg)">
+      </div>
+      <span><strong>+7.200 pessoas</strong> já na plataforma · 4,9 de avaliação</span>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- OPEN LOOP 1 -->
+<div class="sec" style="padding:52px 20px;">
+  <div class="inner rv">
+    <div class="ol-box">
+      Tem um motivo específico pelo qual pessoas que comem frango todo dia ganham <strong>menos músculo</strong> do que quem come hambúrguer proteico às quartas. Você vai entender isso nos próximos minutos — e vai mudar completamente como você pensa em dieta.
+    </div>
+  </div>
+</div>
+
+<!-- DOR -->
+<section class="sec bg-off">
+  <div class="inner">
+    <div class="lbl rv">Isso vai soar familiar</div>
+    <h2 class="h2 rv d1">Se você treina mas ainda não viu<br>o resultado que merecia...</h2>
+    <div class="pain-grid">
+      <div class="pain-item rv d1">
+        <svg class="pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <em>"Treino todo dia, como frango e batata-doce, e o resultado não aparece. Tô enjoado dessa comida de academia."</em>
+      </div>
+      <div class="pain-item rv d2">
+        <svg class="pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <em>"Toda dieta que começo, no fim de semana abandono. Aí vem aquela culpa — e zero resultado."</em>
+      </div>
+      <div class="pain-item rv d3">
+        <svg class="pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <em>"Não sei quanto de proteína eu preciso. Cada lugar que pesquiso fala uma coisa diferente."</em>
+      </div>
+      <div class="pain-item rv d4">
+        <svg class="pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <em>"Já gastei R$400 com nutricionista e recebi o mesmo cardápio genérico que tem no Google."</em>
+      </div>
+      <div class="pain-item rv d5">
+        <svg class="pi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <em>"Todo app de nutrição que baixei é complicado demais. Passo mais tempo cadastrando alimento do que comendo."</em>
+      </div>
+    </div>
+    <p class="rv" style="margin-top:32px;font-size:18px;color:var(--muted);text-align:center;font-style:italic;">Se você se identificou com qualquer um desses — você está no lugar certo.</p>
+  </div>
+</section>
+
+<!-- PATTERN INTERRUPT -->
+<div class="pi-q">
+  <h2 class="rv">Você treina há quanto tempo<br><span>sem ver o resultado que você merecia?</span></h2>
+</div>
+
+<!-- OPEN LOOP 2 + CHEF -->
+<section class="sec">
+  <div class="inner">
+    <div class="rv" style="margin-bottom:56px;">
+      <div class="ol-box">Em 2018, o Chef Leonardo Ferrari fez uma descoberta na cozinha profissional que <strong>nenhum nutricionista estava usando.</strong> O que ele encontrou mudou a forma como mais de 7.200 pessoas encaram a dieta — e vai mudar a sua também.</div>
+    </div>
+    <div class="chef-grid">
+      <div class="rv">
+        <div class="chef-card">
+          <img src="images/Foto do Chef.png" alt="Chef Leonardo Ferrari" class="chef-img">
+          <div class="chef-card-info">
+            <div class="chef-card-name">Chef Leonardo Ferrari</div>
+            <div class="chef-card-role">Especialista em Gastronomia Proteica</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="chef-badge rv">Criador do FIT PRO</div>
+        <h2 class="chef-name rv d1">Chef Leonardo Ferrari</h2>
+        <p class="chef-role rv d1">Especialista em Gastronomia Proteica de Alta Performance</p>
+        <p class="chef-bio rv d2">Após anos na cozinha profissional, Leonardo percebeu que o maior inimigo da dieta não é a falta de vontade — é a falta de sabor. Desenvolveu o método <strong>Engenharia Reversa do Sabor</strong>: usar ciência culinária para recriar textura, crocância e prazer de comida calórica em receitas anabólicas de verdade. Hoje, com inteligência artificial, entrega esse método personalizado para o corpo de cada pessoa.</p>
+        <div class="chef-stats rv d3">
+          <div class="cs"><strong>+7.200</strong><span>pessoas atendidas</span></div>
+          <div class="cs"><strong>120+</strong><span>receitas desenvolvidas</span></div>
+          <div class="cs"><strong>68g</strong><span>proteína máx./porção</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- MECHANISM -->
+<section class="sec bg-green">
+  <div class="inner">
+    <div class="lbl rv">Como funciona</div>
+    <h2 class="h2 rv d1">Conheça a <span class="hi">Engenharia Reversa do Sabor</span></h2>
+    <p class="body-txt rv d2">Ao invés de um cardápio genérico, o FIT PRO parte do que você ama comer — e calcula para trás qual combinação de ingredientes bate exatamente na sua meta proteica.</p>
+    <div class="mech-grid">
+      <div class="mech-card rv d1"><div class="mech-num">01</div><h3>IA Biométrica</h3><p>Você informa peso, altura, objetivo e nível de treino. A IA calcula sua meta exata de proteína — personalizada para o SEU corpo, não para todo mundo.</p></div>
+      <div class="mech-card rv d2"><div class="mech-num">02</div><h3>Motor de Receitas Inteligente</h3><p>A IA analisa o que você tem em casa e filtra as receitas do Chef Ferrari que encaixam no seu macro do dia. Ela escolhe por você — zero frango sem graça.</p></div>
+      <div class="mech-card rv d3"><div class="mech-num">03</div><h3>Química Culinária do Chef</h3><p>Reação de Maillard, ilusão de textura e temperos de alta potência recriam o sabor de comida calórica com a proteína que os seus músculos precisam.</p></div>
+    </div>
+    <div class="rv" style="margin-top:64px;">
+      <div class="lbl">3 passos</div>
+      <h3 class="h2" style="font-size:clamp(22px,3vw,32px);">Em 2 minutos você sabe. Em 30, tá comendo.</h3>
+      <div class="steps">
+        <div class="step rv d1"><div class="step-n">1</div><div><h4>Você digita seu perfil</h4><p>Peso, objetivo e o que você tem em casa. Menos de 2 minutos. Sem tabelas, sem pesagem, sem cálculo.</p></div></div>
+        <div class="step rv d2"><div class="step-n">2</div><div><h4>A IA calcula e recomenda</h4><p>Meta de proteína personalizada + receitas do Chef Ferrari que encaixam no seu macro hoje. Filtradas, organizadas, prontas para você.</p></div></div>
+        <div class="step rv d3"><div class="step-n">3</div><div><h4>Você cozinha e bate a meta sem perceber</h4><p>Foto real + passo a passo de chef. A maioria pronta em menos de 15 minutos. Bata a proteína comendo hambúrguer, pizza ou sobremesa. Todo dia.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- APP MOCKUP ANIMATED -->
+<section class="sec">
+  <div class="inner">
+    <div class="lbl rv">Veja ao vivo</div>
+    <h2 class="h2 rv d1">O app real funcionando<br><span class="hi">— tela por tela</span></h2>
+    <div class="app-wrap">
+
+      <!-- PHONE WITH ANIMATED SCREENSHOTS -->
+      <div class="rv">
+        <div class="phone-shell">
+          <div class="phone">
+            <div class="phone-top"><div class="notch"></div></div>
+            <div class="phone-screen" id="appScreen">
+              <div class="slide active" id="slide-0"><img src="images/HYrLEx8971214.png" alt="App - Café e Lanches"></div>
+              <div class="slide" id="slide-1"><img src="images/LaEADj8971214.png" alt="App - Sobremesas"
+                onerror="this.src='images/LAeADj8971214.png'"></div>
+              <div class="slide" id="slide-2"><img src="images/ErngNz8971214.png" alt="App - Almoço e Janta"></div>
+              <div class="phone-bar"><div class="phone-bar-fill" id="barFill"></div></div>
+            </div>
+            <div class="phone-home"><div class="home-pill"></div></div>
+          </div>
+          <div class="phone-dots" id="phoneDots">
+            <div class="phone-dot active"></div>
+            <div class="phone-dot"></div>
+            <div class="phone-dot"></div>
+          </div>
+        </div>
+        <!-- Results image below phone -->
+        <div class="results-img rv" style="margin-top:24px;max-width:280px;margin-left:auto;margin-right:auto;">
+          <img src="images/CYDpfY8676173.png" alt="Resultados no app — 196g proteína" style="border-radius:14px;box-shadow:var(--lg);">
+        </div>
+      </div>
+
+      <!-- FEATURE LIST -->
+      <div class="feat-list rv d1">
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div><h4>Resposta em segundos</h4><p>Sem esperar nutricionista. Sem consulta. Sem tabela nutricional manual.</p></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          </div>
+          <div><h4>100% para o seu corpo</h4><p>Calculado para o seu peso, seu objetivo e o que você tem em casa hoje.</p></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div><h4>No celular, sempre com você</h4><p>Funciona no iPhone e Android. Abra na cozinha, no mercado, onde quiser.</p></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </div>
+          <div><h4>Atualiza conforme você evolui</h4><p>Mudou de objetivo? Perdeu peso? A IA recalcula na hora.</p></div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div><h4>Ingredientes do seu mercado</h4><p>Sem proteína importada, sem ingredientes caros. O que você já tem em casa.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section class="sec bg-off">
+  <div class="inner wide">
+    <div class="rv" style="margin-bottom:40px;">
+      <div class="ol-box">O que o Rodrigo, de Campinas, comeu na semana em que perdeu 3,5kg de gordura <strong>vai contra tudo que você já ouviu sobre dieta.</strong> Você vai ver nos depoimentos abaixo.</div>
+    </div>
+    <div class="lbl rv">Resultados reais</div>
+    <h2 class="h2 rv d1">O que dizem quem já usa o <span class="hi">FIT PRO</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card rv d1">
+        <div class="testi-stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"A IA calculou exatamente o que eu precisava. Em 3 semanas bati a meta de proteína pela primeira vez na vida — comendo hambúrguer às quartas."</p>
+        <div class="testi-author">
+          <div class="testi-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="testi-name">Carla Menezes</div><div class="testi-loc">São Paulo/SP</div><div class="testi-result">+2,1kg de massa em 30 dias</div></div>
+        </div>
+      </div>
+      <div class="testi-card rv d2">
+        <div class="testi-stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Na semana que perdi 3,5kg comi pizza proteica terça e quinta. Minha namorada achou que eu tinha traído a dieta. Mas foi a semana que mais acertei."</p>
+        <div class="testi-author">
+          <div class="testi-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="testi-name">Rodrigo Alves</div><div class="testi-loc">Campinas/SP</div><div class="testi-result">-3,5kg em 1 semana</div></div>
+        </div>
+      </div>
+      <!-- WhatsApp screenshot -->
+      <div class="testi-card whatsapp rv d3">
+        <img src="images/MnHlbu5687817.jpeg" alt="Depoimento WhatsApp — amando as receitas">
+      </div>
+      <div class="testi-card rv d1">
+        <div class="testi-stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Já gastei R$400 com nutricionista e recebia cardápio genérico. O FIT PRO calculou minha proteína em 2 minutos com o que tinha em casa. Funcionou mais do que qualquer plano que já fiz."</p>
+        <div class="testi-author">
+          <div class="testi-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="testi-name">André Oliveira</div><div class="testi-loc">Recife/PE</div><div class="testi-result">Economizou R$400/mês</div></div>
+        </div>
+      </div>
+      <div class="testi-card rv d2">
+        <div class="testi-stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"2 meses sem falhar na dieta. O app calcula o que preciso e me dá opções gostosas. Minha família não percebe que é dieta fitness."</p>
+        <div class="testi-author">
+          <div class="testi-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="testi-name">Patrícia Leal</div><div class="testi-loc">Manaus/AM</div><div class="testi-result">2 meses sem abandonar</div></div>
+        </div>
+      </div>
+      <div class="testi-card rv d3">
+        <div class="testi-stars">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Fiz o hambúrguer fit para o jantar em família. Todo mundo pediu a receita. Não acreditaram que era dieta proteica."</p>
+        <div class="testi-author">
+          <div class="testi-av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="testi-name">Lucas Ferreira</div><div class="testi-loc">Porto Alegre/RS</div><div class="testi-result">Família toda adotou</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- RECIPES -->
+<section class="sec">
+  <div class="inner wide">
+    <div class="lbl rv">O cardápio</div>
+    <h2 class="h2 rv d1">120 receitas que parecem delivery<br><span class="hi">— mas trabalham pelo seu corpo</span></h2>
+    <p class="body-txt rv d2">Com foto real, passo a passo de chef e calculadas para o seu macro. Em categorias para você não perder tempo escolhendo.</p>
+    <div class="recipes-grid">
+      <div class="recipe-card rv d1">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/Asgxtg7269861.png" alt="Frango à Parmegiana"></div>
+        <div class="recipe-body"><div class="recipe-name">Frango à Parmegiana Irresistível</div><div class="tags"><span class="tag tg">60g proteína</span><span class="tag ty">15 min</span><span class="tag to">Airfryer</span></div></div>
+      </div>
+      <div class="recipe-card rv d2">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/PlSpfl4298700.webp" alt="Salmão Cremoso"></div>
+        <div class="recipe-body"><div class="recipe-name">Salmão Cremoso de Airfryer</div><div class="tags"><span class="tag tg">59g proteína</span><span class="tag ty">25 min</span></div></div>
+      </div>
+      <div class="recipe-card rv d3">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/PnLXhr4176917.webp" alt="Ovo Poché com Avocado"></div>
+        <div class="recipe-body"><div class="recipe-name">Ovo Poché com Creme de Abacate</div><div class="tags"><span class="tag tg">28g proteína</span><span class="tag ty">11 min</span><span class="tag to">Café da manhã</span></div></div>
+      </div>
+      <div class="recipe-card rv d1">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/FkJhNH7334459.png" alt="Salgados Proteicos"></div>
+        <div class="recipe-body"><div class="recipe-name">Salgado de Frango com Queijo</div><div class="tags"><span class="tag tg">34g proteína</span><span class="tag ty">4 ingredientes</span></div></div>
+      </div>
+      <div class="recipe-card rv d2">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/ICtann2787444.webp" alt="Brownie, Pizza, Salmão — Collage"></div>
+        <div class="recipe-body"><div class="recipe-name">Brownies Proteicos + Pizza Fit</div><div class="tags"><span class="tag tg">45g proteína</span><span class="tag ty">12 min</span><span class="tag to">Top vendidas</span></div></div>
+      </div>
+      <div class="recipe-card rv d3">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/xuYyPX2787444.webp" alt="Panqueca Proteica"></div>
+        <div class="recipe-body"><div class="recipe-name">Panqueca Proteica de Frigideira</div><div class="tags"><span class="tag tg">37g proteína</span><span class="tag ty">8 min</span></div></div>
+      </div>
+      <div class="recipe-card rv d1">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/FeDqNH2787444.webp" alt="Almoço e Janta — Collage"></div>
+        <div class="recipe-body"><div class="recipe-name">Almôndegas + Parmegiana + Wings</div><div class="tags"><span class="tag tg">51g proteína</span><span class="tag ty">15 min</span></div></div>
+      </div>
+      <div class="recipe-card rv d2">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/XEjySX2787444.webp" alt="Sobremesas Proteicas"></div>
+        <div class="recipe-body"><div class="recipe-name">Sobremesas Proteicas — Pudim, Crepe e Mugs</div><div class="tags"><span class="tag tg">28g proteína</span><span class="tag ty">5–10 min</span><span class="tag to">Sobremesa</span></div></div>
+      </div>
+      <div class="recipe-card rv d3">
+        <div class="recipe-img-wrap"><img class="recipe-img" src="images/nsFDuN2787444.webp" alt="Burger Fit + Muffins"></div>
+        <div class="recipe-body"><div class="recipe-name">Hambúrguer Fit + Muffins Salgados</div><div class="tags"><span class="tag tg">40g proteína</span><span class="tag ty">15 min</span><span class="tag to">Pós-treino</span></div></div>
+      </div>
+    </div>
+    <div class="recipes-more rv">+ 111 receitas esperando por você no app</div>
+    <div class="cat-row rv">
+      <div class="cat-chip">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Café da manhã<br>e Lanches</span>
+      </div>
+      <div class="cat-chip">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <span>Almoço<br>e Janta</span>
+      </div>
+      <div class="cat-chip">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Sobremesas<br>Proteicas</span>
+      </div>
+      <div class="cat-chip">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+        <span>Pré e<br>Pós-Treino</span>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- VALUE STACK -->
+<section class="sec bg-off">
+  <div class="inner">
+    <div class="lbl rv">O que você recebe</div>
+    <h2 class="h2 rv d1">Tudo incluso — e o quanto vale cada item</h2>
+    <div class="stack">
+      <div class="si rv d1">
+        <div class="si-l"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div><div class="si-title">FIT PRO App — IA de Proteína + 120 Receitas</div><div class="si-desc">IA personalizada · fotos reais · passo a passo de chef</div></div></div>
+        <div class="si-r"><div class="si-old">R$197</div><div class="si-val">Incluso</div></div>
+      </div>
+      <div class="si star rv d2">
+        <div class="si-l"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div><div><div class="si-title">BÔNUS 1 — Ficha de Treino do Chef Ferrari</div><div class="si-desc">Do iniciante ao avançado · em casa e na academia</div></div></div>
+        <div class="si-r"><div class="si-old">R$97</div><div class="si-val free">GRÁTIS</div></div>
+      </div>
+      <div class="si star rv d3">
+        <div class="si-l"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><div><div class="si-title">BÔNUS 2 — Calculadora de Déficit + Meta de Proteína</div><div class="si-desc">Saiba exatamente quantas calorias consumir para secar</div></div></div>
+        <div class="si-r"><div class="si-old">R$67</div><div class="si-val free">GRÁTIS</div></div>
+      </div>
+      <div class="si star rv d4">
+        <div class="si-l"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div><div><div class="si-title">BÔNUS ESPECIAL — Whey Protein Caseiro</div><div class="si-desc">Método para fazer Whey puro com ingredientes de supermercado · Economize R$1.800/ano</div></div></div>
+        <div class="si-r"><div class="si-old">R$47</div><div class="si-val free">GRÁTIS</div></div>
+      </div>
+      <div class="stack-total rv d5">
+        <div><div class="st-lbl">Total se comprasse separado</div><div class="st-sub">Você paga uma vez · Acesso para sempre</div></div>
+        <div style="text-align:right;"><div class="st-from">R$408</div><div class="st-price">R$47</div><div class="st-once">pagamento único · vitalício</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE PER DAY -->
+<div class="ppd">
+  <div class="ppd-big rv">R$0,12</div>
+  <div class="ppd-cap rv d1">por dia para ter a IA do Chef Ferrari trabalhando pelo seu corpo</div>
+  <div class="ppd-sub rv d2">Menos que uma bala de supermercado. Para sempre.</div>
+</div>
+<div class="divider"></div>
+
+<!-- OBJECTION -->
+<section class="sec bg-green">
+  <div class="inner narrow">
+    <div class="rv" style="margin-bottom:36px;">
+      <div class="ol-box">Antes de te contar o preço, preciso que você entenda por que a gente cobra tão pouco por algo que nutricionistas cobrariam <strong>R$300 por mês.</strong></div>
+    </div>
+    <div class="obj-box rv d1">
+      <h3>Por que R$47? Não é barato demais?</h3>
+      <p>Um nutricionista cobra em média R$200–R$400 por consulta, você recebe um cardápio genérico — e na próxima consulta já pagou mais R$300. O Chef Ferrari decidiu fazer diferente.</p>
+      <p>A IA faz o trabalho de personalização que levaria horas de um nutricionista — em 2 minutos, para qualquer pessoa, com as receitas já prontas.</p>
+      <p><strong>Esse preço é de lançamento.</strong> Conforme a plataforma cresce, o preço sobe. Quem entrar agora por R$47 mantém o acesso vitalício para sempre.</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="sec" id="comprar">
+  <div class="inner">
+    <div class="lbl rv" style="justify-content:center;">Sua escolha</div>
+    <h2 class="h2 rv d1" style="text-align:center;">Garanta agora — antes que o preço suba</h2>
+    <p class="body-txt rv d2" style="text-align:center;color:var(--muted2);">Pagamento único. Sem mensalidades. Acesso vitalício.</p>
+    <div class="price-grid">
+      <div class="pc rv d1">
+        <div class="pc-lbl">Plano Starter</div><div class="pc-name">FIT PRO Essencial</div>
+        <div class="pc-from">De R$97</div><div class="pc-price">R$27</div>
+        <div class="pc-once">pagamento único</div><div class="pc-tag">Vitalício</div>
+        <ul class="pc-list">
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>IA de cálculo personalizado</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>120 Receitas Proteicas</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Fotos reais + passo a passo</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Ficha de Treino</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Calculadora de déficit</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Whey Caseiro (Bônus)</li>
+        </ul>
+        <button class="btn-plan ghost">QUERO O ESSENCIAL — R$27</button>
+        <div class="btn-plan-sub">De R$97 por apenas R$27 · Vitalício</div>
+      </div>
+      <div class="pc feat rv d2">
+        <div class="pc-best">MAIS ESCOLHIDO</div>
+        <div class="pc-lbl">Plano Completo</div><div class="pc-name">FIT PRO Platinum</div>
+        <div class="pc-from">De R$147</div><div class="pc-price">R$47</div>
+        <div class="pc-once">pagamento único</div><div class="pc-tag">Vitalício</div>
+        <ul class="pc-list">
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>IA de cálculo personalizado</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>120 Receitas Proteicas</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>120 Receitas Low Carb</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>120 Receitas Sem Glúten</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Ficha de Treino</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Calculadora de déficit</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Whey Caseiro + atualizações</li>
+        </ul>
+        <button class="btn-plan primary">QUERO O PLATINUM — R$47</button>
+        <div class="btn-plan-sub">De R$147 por apenas R$47 · Vitalício</div>
+      </div>
+      <div class="pc rv d3">
+        <div class="pc-lbl">Plano Gold</div><div class="pc-name">FIT PRO Super Gold</div>
+        <div class="pc-from">De R$197</div><div class="pc-price">R$57</div>
+        <div class="pc-once">pagamento único</div><div class="pc-tag">Vitalício</div>
+        <ul class="pc-list">
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tudo do Platinum</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>200 Receitas Proteicas</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>200 Receitas Low Carb</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>30 Cardápios Semanais</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lista de compras integrada</li>
+          <li><svg class="ck" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Suporte prioritário</li>
+        </ul>
+        <button class="btn-plan ghost">QUERO O GOLD — R$57</button>
+        <div class="btn-plan-sub">De R$197 por apenas R$57 · Vitalício</div>
+      </div>
+    </div>
+    <p class="rv" style="text-align:center;font-size:12px;color:var(--muted2);margin-top:20px;">* Pagamento único, sem mensalidades. Acesso imediato após confirmação.</p>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- GUARANTEE -->
+<section class="sec bg-off">
+  <div class="inner" style="text-align:center;">
+    <div class="lbl rv" style="justify-content:center;">Risco zero</div>
+    <h2 class="h2 rv d1">Tente por 30 dias — ou seu dinheiro de volta</h2>
+    <div class="gbox rv d2">
+      <div class="gbox-icon"><svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+      <h3>Garantia Incondicional de 30 Dias</h3>
+      <p>Se por qualquer motivo o FIT PRO não funcionar para você — basta enviar um e-mail em até 30 dias e devolvemos <strong>100% do seu dinheiro.</strong> Sem perguntas, sem burocracia.</p>
+      <div class="seals">
+        <div class="seal"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div>Compra<br>100% Segura</div></div>
+        <div class="seal"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div>30 dias de<br>garantia</div></div>
+        <div class="seal"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div>Reembolso<br>garantido</div></div>
+        <div class="seal"><div class="si-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div>+7.200<br>clientes</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="sec">
+  <div class="inner narrow">
+    <div class="lbl rv">Tire suas dúvidas</div>
+    <h2 class="h2 rv d1">Perguntas frequentes</h2>
+    <div class="faq-list rv d2">
+      <div class="faq-item"><details><summary>Funciona se eu não sei cozinhar? <svg class="fq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary><p class="faq-a">Sim. Cada receita tem passo a passo detalhado com foto real e tempo de preparo. As mais simples ficam prontas em menos de 10 minutos. Se você consegue ligar o fogão, consegue fazer qualquer receita do FIT PRO.</p></details></div>
+      <div class="faq-item"><details><summary>E se eu não tiver os ingredientes que a IA sugerir? <svg class="fq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary><p class="faq-a">A IA foi projetada para isso. Você informa o que tem em casa e ela filtra apenas as receitas possíveis. Todos os ingredientes são comuns de supermercado — sem proteína importada, sem ingredientes difíceis.</p></details></div>
+      <div class="faq-item"><details><summary>Como vou receber o acesso? <svg class="fq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary><p class="faq-a">Imediatamente após a confirmação do pagamento você recebe um e-mail com seu link de acesso. Funciona direto no navegador do celular — compatível com iPhone e Android.</p></details></div>
+      <div class="faq-item"><details><summary>Funciona para cutting (perda de gordura) também? <svg class="fq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary><p class="faq-a">Sim. A IA calcula para qualquer objetivo: ganho de massa, perda de gordura ou manutenção. As receitas são filtradas pelo seu macro do dia — funcionam igualmente para bulking e cutting.</p></details></div>
+      <div class="faq-item"><details><summary>Minha família come diferente. As receitas servem para quem não está em dieta? <svg class="fq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary><p class="faq-a">Dezenas de clientes relatam que a família adotou as receitas sem saber que eram fit. O Chef Ferrari desenvolveu receitas com sabor de verdade — hambúrguer, pizza, sobremesa. Sua família vai pedir de novo.</p></details></div>
+      <div class="faq-item"><details><summary>"Vitalício" quer dizer o quê exatamente? <svg class="fq-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></summary><p class="faq-a">Você paga uma vez e tem acesso para sempre — sem mensalidade, sem renovação, sem surpresas. Inclui todas as atualizações futuras do app e das receitas.</p></details></div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="final-inner">
+    <h2 class="rv">Chega de escolher entre<br><em>resultado e prazer de comer.</em></h2>
+    <p class="rv d1">Junte-se a +7.200 pessoas que estão ganhando músculo<br>comendo hambúrguer, pizza e sobremesa — todo dia.</p>
+    <div class="rv d2">
+      <a href="#comprar" class="btn-cta">
+        QUERO MEU ACESSO VITALÍCIO AGORA
+        <span class="btn-sub">De R$147 por apenas R$47 · Acesso imediato · Garantia 30 dias</span>
+      </a>
+    </div>
+    <div class="rv d3" style="margin-top:14px;font-size:13px;color:rgba(255,255,255,.2);">Preço de lançamento — pode aumentar a qualquer momento</div>
+    <div class="ps-box rv d4"><strong>P.S.:</strong> Se você chegou até aqui, você já sabe que precisa de algo diferente. O FIT PRO tem 30 dias de garantia — o risco é zero. O pior que pode acontecer é você testar, não gostar, e pedir seu dinheiro de volta. O melhor que pode acontecer é você finalmente ter o corpo que você quer, comendo o que você gosta. Você decide.</div>
+  </div>
+</section>
+
+<footer>
+  <p>Copyright 2026 — FIT PRO | Chef Leonardo Ferrari ®<br><a href="#">Termos de Uso</a> · <a href="#">Política de Privacidade</a><br><br>Este produto não é um serviço médico ou nutricional. Os resultados podem variar de acordo com cada pessoa.</p>
+</footer>
+
+<script>
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// APP SCREENSHOT ANIMATION
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('.phone-dot');
+const bar    = document.getElementById('barFill');
+let current = 0, timer, barTimer;
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = n % slides.length;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  // reset progress bar
+  bar.style.transition = 'none';
+  bar.style.width = '0%';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      bar.style.transition = 'width 3s linear';
+      bar.style.width = '100%';
+    });
+  });
+}
+
+function start() {
+  goTo(0);
+  timer = setInterval(() => goTo(current + 1), 3200);
+}
+
+// Start when phone enters viewport
+const phoneObs = new IntersectionObserver(entries => {
+  if(entries[0].isIntersecting) { start(); phoneObs.disconnect(); }
+}, { threshold: 0.3 });
+const phoneEl = document.querySelector('.phone');
+if(phoneEl) phoneObs.observe(phoneEl);
+
+// Click dots
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => { clearInterval(timer); goTo(i); timer = setInterval(() => goTo(current + 1), 3200); });
+});
+</script>
+</body>
+</html>
