@@ -1,0 +1,2 @@
+[run]
+"build:dev" = "npm install && npm run dev"

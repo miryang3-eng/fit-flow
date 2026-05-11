@@ -1,0 +1,13 @@
+{
+  "name": "fit-flow",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --port 8080 --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
